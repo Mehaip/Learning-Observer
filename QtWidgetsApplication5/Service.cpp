@@ -6,4 +6,5 @@ vector<string> Service::get_all() {
 
 void Service::add(string str) {
 	repos.add(str);
+	notify();
 }

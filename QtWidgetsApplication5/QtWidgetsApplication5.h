@@ -6,6 +6,24 @@
 #include "qpushbutton.h"
 #include "qlineedit.h"
 #include "Service.h"
+#include "Observer.h"
+
+class App2 : public QWidget, public Observer {
+public:
+	App2(Service& srv) : srv{ srv } {
+		srv.addObserver(this);
+		initGUI2();
+		reloadList();
+	};
+private:
+	void update() override {
+		reloadList();
+	}
+	void initGUI2();
+	void reloadList();
+	Service& srv;
+	QListWidget* list3 = new QListWidget{};
+};
 
 class Aplicatie: public QWidget
 {
@@ -15,6 +33,7 @@ public:
 		initGUI();
 		initTable();
 		connect();
+
 	}
 private:
 	Service& srv;

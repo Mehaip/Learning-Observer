@@ -2,6 +2,7 @@
 #include "qlayout.h"
 
 void Aplicatie::initGUI() {
+
 	auto mainLy = new QHBoxLayout{};
 	setLayout(mainLy);
 	mainLy->addWidget(list2);
@@ -9,6 +10,8 @@ void Aplicatie::initGUI() {
 	mainLy->addWidget(newWindow);
 	mainLy->addWidget(addBtn);
 	mainLy->addWidget(text_line);
+	auto newApp = new App2{ srv };
+	newApp->show();
 }
 
 void Aplicatie::initTable() {
@@ -28,8 +31,8 @@ void Aplicatie::connect() {
 		});
 
 	QWidget::connect(newWindow, &QPushButton::clicked, [&]() {
-		auto nc = new Aplicatie{ srv };
-		nc->show();
+		auto newApp = new App2{ srv };
+		newApp->show();
 		});
 
 	QWidget::connect(addBtn, &QPushButton::clicked, [&]() {
@@ -37,4 +40,22 @@ void Aplicatie::connect() {
 		srv.add(text);
 		initTable();
 		});
+}
+
+void App2::initGUI2() {
+	auto mainLy = new QHBoxLayout{};
+	setLayout(mainLy);
+
+	mainLy->addWidget(list3);
+}
+
+void App2::reloadList() {
+	vector<string> list = srv.get_all();
+	list3->blockSignals(true);
+	list3->clear();
+	list3->blockSignals(false);
+	for (auto& it : list) {
+		if(isdigit(it[0]))
+		list3->addItem(QString::fromStdString(it));
+	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "repo.h"
-class Service
+#include "Observer.h"
+class Service:public Observable
 {
 private:
 	repo& repos;
