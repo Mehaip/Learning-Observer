@@ -48,3 +48,20 @@ private:
 
 
 };
+
+class App3 :public QWidget, public Observer {
+public:
+	App3(Service& srv) : srv{ srv } {
+		srv.addObserver(this);
+		GUI();
+		reloadlist();
+	};
+private:
+	Service& srv;
+	void update() override {
+		reloadlist();
+	}
+	void GUI();
+	void reloadlist();
+	QListWidget* list4= new QListWidget{};
+};

@@ -12,6 +12,9 @@ void Aplicatie::initGUI() {
 	mainLy->addWidget(text_line);
 	auto newApp = new App2{ srv };
 	newApp->show();
+	auto newApp2 = new App3{ srv };
+	newApp2->show();
+
 }
 
 void Aplicatie::initTable() {
@@ -58,4 +61,24 @@ void App2::reloadList() {
 		if(isdigit(it[0]))
 		list3->addItem(QString::fromStdString(it));
 	}
+}
+
+void App3::reloadlist() {
+	vector<string> lista = srv.get_all();
+
+	list4->blockSignals(true);
+	list4->clear();
+	list4->blockSignals(false);
+
+	for (auto& it : lista) {
+		if (!isdigit(it[0]))
+			list4->addItem(QString::fromStdString(it));
+	}
+}
+
+void App3::GUI() {
+	auto mainLy = new QHBoxLayout{};
+	setLayout(mainLy);
+	mainLy->addWidget(list4);
+
 }
