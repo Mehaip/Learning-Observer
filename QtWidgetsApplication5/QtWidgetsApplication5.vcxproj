@@ -94,6 +94,7 @@
   <ItemGroup>
     <ClCompile Include="repo.cpp" />
     <ClCompile Include="Service.cpp" />
+    <ClInclude Include="Observer.h" />
     <ClInclude Include="repo.h" />
     <ClInclude Include="Service.h" />
     <QtRcc Include="QtWidgetsApplication5.qrc" />
